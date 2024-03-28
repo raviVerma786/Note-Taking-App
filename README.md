@@ -9,6 +9,5 @@ Live Demo : https://66057fa8cf449111747bd2ca--dancing-peony-f954db.netlify.app/
 Mobile View : <br>
 ![image](https://github.com/raviVerma786/Note-Taking-App/assets/97225196/99d09400-6e4d-4bb6-b6de-387c527396fb)
 ![image](https://github.com/raviVerma786/Note-Taking-App/assets/97225196/99d09400-6e4d-4bb6-b6de-387c527396fb)
-![image](https://github.com/raviVerma786/Note-Taking-App/assets/97225196/99d09400-6e4d-4bb6-b6de-387c527396fb)
 
 
