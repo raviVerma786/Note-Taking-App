@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import "./App.css";
 import List from "./List";
 import { app } from "./firebase";
-import { getDatabase, ref, set, push } from "firebase/database";
+import { getDatabase, ref, set, push, get, child } from "firebase/database";
 
 const db = getDatabase(app);
 let noteId = 0;
@@ -26,10 +26,9 @@ export default function App() {
       .catch((error) => {
         console.log(error);
       });
-    
 
     // Another method of adding data into database that will generate sub folder automatically
-    
+
     // const postListRef = ref(db, 'Notes');
     // const newPostRef = push(postListRef);
     // set(newPostRef,{
@@ -39,6 +38,21 @@ export default function App() {
 
     noteId++;
   };
+
+  const deleteDataFromDatabase = (id)=>{
+    const dbref = ref(db);
+    get(child(dbref,`Notes/Note ${noteId}`)).then(
+      (snapshot)=>{
+        if(snapshot.exists()){
+          console.log(snapshot.val());
+        }
+        else{
+          console.log("Data not found !");
+        }
+      }
+
+    );
+}
 
   const listOfItems = () => {
     if (inputData.length > 0) {
@@ -58,6 +72,8 @@ export default function App() {
         return idx !== id;
       });
     });
+
+    deleteDataFromDatabase(id);
   };
 
   return (
