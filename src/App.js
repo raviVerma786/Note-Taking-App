@@ -1,22 +1,40 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./App.css";
 import List from "./List";
 import { app } from "./firebase";
-import { getDatabase, ref, set, push, get, child } from "firebase/database";
+import {
+  getDatabase,
+  ref,
+  set,
+  push,
+  get,
+  child,
+  onValue,
+} from "firebase/database";
 
 const db = getDatabase(app);
 let noteId = 0;
 
 export default function App() {
   const [inputData, setinputData] = useState("");
-  const [items, setItems] = useState([]);
+  const [notesData, setNotesData] = useState(null);
+
+  useEffect(() => {
+    const dbref = ref(db, "Notes");
+    onValue(dbref, (snapshot) => {
+      const data = snapshot.val();
+      // console.log(typeof data);
+      // console.log(data);
+      setNotesData(data);
+    });
+  }, [setNotesData]);
 
   const itemEvent = (event) => {
     setinputData(event.target.value);
   };
 
   const putDataIntoDatabase = () => {
-    set(ref(db, `Notes/Note ${noteId}`), {
+    set(ref(db, "Notes/" + noteId), {
       id: noteId,
       note: inputData,
     })
@@ -26,55 +44,37 @@ export default function App() {
       .catch((error) => {
         console.log(error);
       });
-
-    // Another method of adding data into database that will generate sub folder automatically
-
-    // const postListRef = ref(db, 'Notes');
-    // const newPostRef = push(postListRef);
-    // set(newPostRef,{
-    //   id : noteId,
-    //   Note : inputData
-    // })
-
+    
+      setinputData("");
     noteId++;
   };
 
-  const deleteDataFromDatabase = (id)=>{
-    const dbref = ref(db);
-    get(child(dbref,`Notes/Note ${noteId}`)).then(
-      (snapshot)=>{
-        if(snapshot.exists()){
-          console.log(snapshot.val());
-        }
-        else{
-          console.log("Data not found !");
-        }
-      }
-
-    );
-}
-
-  const listOfItems = () => {
-    if (inputData.length > 0) {
-      setItems((oldItems) => {
-        return [...oldItems, inputData];
-      });
-
-      putDataIntoDatabase();
-    }
-
-    setinputData("");
+  const deleteDataFromDatabase = () => {
+    console.log("Data deleted from database");
   };
+  
 
-  const deleteItems = (id) => {
-    setItems((oldItems) => {
-      return oldItems.filter((ele, idx) => {
-        return idx !== id;
-      });
-    });
+  // Before firebase and using only usestate
+  // const listOfItems = () => {
+  //   if (inputData.length > 0) {
+  //     setItems((oldItems) => {
+  //       return [...oldItems, inputData];
+  //     });
 
-    deleteDataFromDatabase(id);
-  };
+  //   }
+
+  //   setinputData("");
+  // };
+
+  // const deleteItems = (id) => {
+  //   setItems((oldItems) => {
+  //     return oldItems.filter((ele, idx) => {
+  //       return idx !== id;
+  //     });
+  //   });
+
+  //   deleteDataFromDatabase(id);
+  // };
 
   return (
     <>
@@ -92,21 +92,25 @@ export default function App() {
 
           <button
             className="btn btn-secondary mx-2 rounded-pill"
-            onClick={listOfItems}
+            onClick={putDataIntoDatabase}
           >
             ➕
           </button>
           <ol>
-            {items.map((itemValue, index) => {
-              return (
-                <List
-                  itemVal={itemValue}
-                  key={index}
-                  id={index}
-                  onSelect={deleteItems}
-                />
-              );
-            })}
+            {notesData && (
+              <div className="todo_style">
+                {Object.entries(notesData).map(([key, value]) => {
+                  return (
+                    <List
+                      itemVal={value.note}
+                      key={key}
+                      onSelect={deleteDataFromDatabase}
+                    />
+                  );
+                })}
+              </div>
+            )}
+
           </ol>
         </div>
       </div>

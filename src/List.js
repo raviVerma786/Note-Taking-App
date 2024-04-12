@@ -6,7 +6,7 @@ export default function List(props) {
     <>
     <div className='todo_style'>
         <i className='fa fa-times' aria-hidden="true" onClick={()=>{
-          return props.onSelect(props.id);
+          return props.onSelect();
         }}/>
         <div id = "note">{props.itemVal}</div>
     </div>
