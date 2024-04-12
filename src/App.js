@@ -6,10 +6,8 @@ import {
   getDatabase,
   ref,
   set,
-  push,
-  get,
-  child,
   onValue,
+  remove
 } from "firebase/database";
 
 const db = getDatabase(app);
@@ -23,13 +21,11 @@ export default function App() {
     const dbref = ref(db, "Notes");
     onValue(dbref, (snapshot) => {
       const data = snapshot.val();
-      // console.log(typeof data);
-      // console.log(data);
       setNotesData(data);
     });
-  }, [setNotesData]);
+  }, []);
 
-  const itemEvent = (event) => {
+  const handleInputNoteChange = (event) => {
     setinputData(event.target.value);
   };
 
@@ -45,12 +41,13 @@ export default function App() {
         console.log(error);
       });
     
-      setinputData("");
+    setinputData("");
     noteId++;
   };
 
-  const deleteDataFromDatabase = () => {
-    console.log("Data deleted from database");
+  const deleteDataFromDatabase = (key) => {
+    const dbNoteRef = ref(db,'Notes/' + key);
+    remove(dbNoteRef);
   };
   
 
@@ -86,7 +83,7 @@ export default function App() {
           <input
             type="text"
             placeholder="Create New Note"
-            onChange={itemEvent}
+            onChange={handleInputNoteChange}
             value={inputData}
           />
 
@@ -104,6 +101,7 @@ export default function App() {
                     <List
                       itemVal={value.note}
                       key={key}
+                      id = {key}
                       onSelect={deleteDataFromDatabase}
                     />
                   );
