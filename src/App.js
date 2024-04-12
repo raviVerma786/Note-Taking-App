@@ -7,7 +7,8 @@ import {
   ref,
   set,
   onValue,
-  remove
+  remove,
+  update
 } from "firebase/database";
 
 const db = getDatabase(app);
@@ -22,7 +23,13 @@ export default function App() {
     onValue(dbref, (snapshot) => {
       const data = snapshot.val();
       setNotesData(data);
+      
+      if(data){
+        const allKeys = Object.keys(data);
+        noteId = Number(allKeys[allKeys.length - 1]) + 1;
+      }
     });
+
   }, []);
 
   const handleInputNoteChange = (event) => {
@@ -42,7 +49,6 @@ export default function App() {
       });
     
     setinputData("");
-    noteId++;
   };
 
   const deleteDataFromDatabase = (key) => {
@@ -50,6 +56,13 @@ export default function App() {
     remove(dbNoteRef);
   };
   
+  const updateDataFromDatabase = (key,noteValue)=>{
+    deleteDataFromDatabase(key);
+    // const noteRef = ref(db,'Notes/' + key);
+    setinputData(noteValue);
+    // update(noteRef,{id:key,note:noteValue});
+  }
+
 
   // Before firebase and using only usestate
   // const listOfItems = () => {
@@ -99,10 +112,11 @@ export default function App() {
                 {Object.entries(notesData).map(([key, value]) => {
                   return (
                     <List
-                      itemVal={value.note}
+                      noteVal={value.note}
                       key={key}
                       id = {key}
                       onSelect={deleteDataFromDatabase}
+                      onUpdate = {updateDataFromDatabase}
                     />
                   );
                 })}
