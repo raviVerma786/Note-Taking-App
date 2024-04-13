@@ -71,11 +71,11 @@ export default function Home() {
     }
   };
 
-  const updateDataFromDatabase = (key, noteValue) => {
+  const updateDataFromDatabase = async(key, noteValue) => {
     // setUpdating(true);
-    // // const noteRef = ref(db,'Notes/' + key);
+    // const noteRef = ref(db,'Notes/' + key);
     // setinputData(noteValue);
-    // // update(noteRef,{id:key,note:inputData});
+    // await update(noteRef,{id:key,note:inputData});
     // setUpdating(false);
     // setinputData("");
   };
