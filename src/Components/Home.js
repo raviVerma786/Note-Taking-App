@@ -11,8 +11,8 @@ import {
   remove,
   update,
 } from "firebase/database";
-import { Navbar } from "./Navbar";
 import { SignIn } from "./SignIn";
+import Navbar from "./Navbar";
 
 const db = getDatabase(app);
 let noteId = 0;

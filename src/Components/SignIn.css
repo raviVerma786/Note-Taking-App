@@ -34,3 +34,22 @@
     font-weight: 550;
     color: rgb(34, 34, 34);
   }
+
+
+#signUpButton{
+    cursor: pointer;
+    color: dodgerblue;
+}
+
+#signUpButton:hover{
+    color: blue;
+}
+
+#signInButton{
+    cursor: pointer;
+    color: dodgerblue;
+}
+
+#signInButton:hover{
+    color: blue;
+}
