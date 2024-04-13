@@ -1,13 +1,6 @@
 import React from "react";
 
 export const List2 = (props) => {
-  const date = new Date();
-  const mm = date.getMonth() + 1;
-  const dd = date.getDate();
-  const yy = date.getFullYear();
-  const hh = date.getHours();
-  const min = date.getMinutes();
-
   return (
     <div className="card-deck">
       <div id="cardShadow" className="card">
@@ -34,7 +27,7 @@ export const List2 = (props) => {
           </button>
         </div>
         <div className="card-footer">
-          <small className="text-muted">{`Last updated on ${dd}/${mm}/${yy} at ${hh}:${min}`}</small>
+          <small className="text-muted">{`Last updated on ${props.date} at ${props.time}`}</small>
         </div>
       </div>
     </div>

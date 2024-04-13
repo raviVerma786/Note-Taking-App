@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "../App.css";
-import List from "./List";
+// import List from "./List";
 import { List2 } from "./List2";
 import { app } from "../firebase";
 import {
@@ -11,8 +11,6 @@ import {
   remove,
   update,
 } from "firebase/database";
-import { SignIn } from "./SignIn";
-import Navbar from "./Navbar";
 
 const db = getDatabase(app);
 let noteId = 0;
@@ -40,9 +38,21 @@ export default function Home() {
   };
 
   const putDataIntoDatabase = () => {
+    const date = new Date();
+    const mm = date.getMonth() + 1;
+    const dd = date.getDate();
+    const yy = date.getFullYear();
+    const hh = date.getHours();
+    const min = date.getMinutes();
+
+    const dt = `${dd}/${mm}/${yy}`;
+    const t  =`${hh}:${min}`;
+
     set(ref(db, "Notes/" + noteId), {
       id: noteId,
       note: inputData,
+      date: dt,
+      time: t
     })
       .then(() => {
         console.log("Note added successfully !");
@@ -122,6 +132,8 @@ export default function Home() {
                       noteVal={value.note}
                       key={key}
                       id={key}
+                      date={value.date}
+                      time = {value.time}
                       onSelect={deleteDataFromDatabase}
                       onUpdate={updateDataFromDatabase}
                     />
