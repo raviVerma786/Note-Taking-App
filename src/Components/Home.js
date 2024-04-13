@@ -46,13 +46,13 @@ export default function Home() {
     const min = date.getMinutes();
 
     const dt = `${dd}/${mm}/${yy}`;
-    const t  =`${hh}:${min}`;
+    const t = `${hh}:${min}`;
 
     set(ref(db, "Notes/" + noteId), {
       id: noteId,
       note: inputData,
       date: dt,
-      time: t
+      time: t,
     })
       .then(() => {
         console.log("Note added successfully !");
@@ -73,10 +73,9 @@ export default function Home() {
 
   const updateDataFromDatabase = (key, noteValue) => {
     // setUpdating(true);
-    // deleteDataFromDatabase(key);
     // // const noteRef = ref(db,'Notes/' + key);
     // setinputData(noteValue);
-    // // update(noteRef,{id:key,note:noteValue});
+    // // update(noteRef,{id:key,note:inputData});
     // setUpdating(false);
     // setinputData("");
   };
@@ -133,7 +132,7 @@ export default function Home() {
                       key={key}
                       id={key}
                       date={value.date}
-                      time = {value.time}
+                      time={value.time}
                       onSelect={deleteDataFromDatabase}
                       onUpdate={updateDataFromDatabase}
                     />
