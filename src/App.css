@@ -71,6 +71,8 @@ ol li{
   flex-wrap: wrap;
   justify-content: left;
   align-items: center;
+  gap: 1rem;
+  padding: 1rem;
 }
 
 .todo_style .fa-times{
