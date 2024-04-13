@@ -57,3 +57,12 @@ h1{
 #updateButton{
   background-color: dodgerblue;
 }
+
+#LogInButton{
+  background-color: dodgerblue;
+}
+
+#logo{
+  font-size: 1.7rem;
+  font-weight: 590;
+}

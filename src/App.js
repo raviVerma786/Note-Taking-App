@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "./App.css";
-import List from "./List";
-import { List2 } from "./List2";
+import List from "./Components/List";
+import { List2 } from "./Components/List2";
 import { app } from "./firebase";
 import {
   getDatabase,
@@ -11,6 +11,7 @@ import {
   remove,
   update,
 } from "firebase/database";
+import { Navbar } from "./Components/Navbar";
 
 const db = getDatabase(app);
 let noteId = 0;
@@ -93,10 +94,11 @@ export default function App() {
 
   return (
     <>
+       <Navbar/>
       <div className="mainDiv">
         <div className="centerDiv">
           <br />
-          <h1>Note Taking App</h1>
+          {/* <h1>Note Taking App</h1> */}
           <br />
           <input
             type="text"
