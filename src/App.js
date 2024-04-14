@@ -1,13 +1,15 @@
-import React from "react";
+import React, { useState } from "react";
 import Navbar from "./Components/Navbar";
 import Home from "./Components/Home";
 import { SignIn } from "./Components/SignIn";
 import { Routes, Route } from "react-router-dom";
 
 const App = () => {
+  const [userSignedIn,setUserSignedIn] = useState(false);
+  const [user,setUser] = useState(null);
   return (
     <>
-      <Navbar />
+      <Navbar setUserSignedIn={setUserSignedIn} setUser={setUser}/>
 
       <Routes>
         <Route path="/" element={<Home />} />

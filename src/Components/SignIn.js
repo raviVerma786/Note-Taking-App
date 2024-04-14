@@ -6,16 +6,18 @@ import { useNavigate } from "react-router-dom";
 import { signInWithEmailAndPassword, createUserWithEmailAndPassword } from "firebase/auth";
 
 export const SignIn = (props) => {
+  let navigate = useNavigate();
+  
   let [authMode, setAuthMode] = useState("signin");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [userName, setUserName] = useState("");
   
   const NavigateToHome = ()=>{
-    let navigate = useNavigate();
     let path = `/`;
     navigate(path);
   }
+
   const changeAuthMode = () => {
     setAuthMode(authMode === "signin" ? "signup" : "signin");
   };
@@ -30,7 +32,7 @@ export const SignIn = (props) => {
         console.log(error);
       });
       
-      // NavigateToHome();
+      NavigateToHome();
   };
 
   const SignUpHandle = (e) => {
