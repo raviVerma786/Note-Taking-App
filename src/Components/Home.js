@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState,useContext } from "react";
 import "../App.css";
 // import List from "./List";
 import { List2 } from "./List2";
@@ -10,12 +10,15 @@ import {
   onValue,
 } from "firebase/database";
 
+import { UserContext } from "../Context/UserCredentials";
+
 const db = getDatabase(app);
 let noteId = 0;
-
 export default function Home() {
   const [inputData, setinputData] = useState("");
   const [notesData, setNotesData] = useState(null);
+
+  const userDetails = useContext(UserContext);
 
   useEffect(() => {
     const dbref = ref(db, "Notes");
@@ -101,7 +104,7 @@ export default function Home() {
       <div className="mainDiv">
         <div className="centerDiv">
           <br />
-        {/* {userSignedIn && <h1>Welcome To NoteTaking Web App!</h1>} */}
+        {userDetails.signedIn && <h2>Welcome To NoteTaking App</h2>}
           <br />
           <input
             type="text"

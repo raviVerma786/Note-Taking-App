@@ -1,9 +1,10 @@
-import React from "react";
+import React,{useContext} from "react";
 import "./SignIn.css";
 import { useState } from "react";
 import { auth } from "../firebase";
 import { useNavigate } from "react-router-dom";
 import { signInWithEmailAndPassword, createUserWithEmailAndPassword } from "firebase/auth";
+import { UserContext } from "../Context/UserCredentials";
 
 export const SignIn = (props) => {
   let navigate = useNavigate();
@@ -12,6 +13,8 @@ export const SignIn = (props) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [userName, setUserName] = useState("");
+
+  const userDetails = useContext(UserContext);
   
   const NavigateToHome = ()=>{
     let path = `/`;
@@ -27,15 +30,14 @@ export const SignIn = (props) => {
     signInWithEmailAndPassword(auth, email, password)
       .then((userCredentials) => {
         console.log(userCredentials);
-        setEmail(email);
-        setUserName(email);
-        console.log(email);
+        userDetails.setSignedIn(true);
+        userDetails.setEmail(email);
+        NavigateToHome();
       })
       .catch((error) => {
         console.log(error);
+        alert('User does not exist ! \nPlease Sign up !')
       });
-      
-      NavigateToHome();
   };
 
   const SignUpHandle = (e) => {
@@ -75,6 +77,7 @@ export const SignIn = (props) => {
                 placeholder="Enter email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
+                required
               />
             </div>
             <div className="form-group mt-3">
@@ -86,6 +89,7 @@ export const SignIn = (props) => {
                 value={password}
                 minLength={8}
                 onChange={(e) => setPassword(e.target.value)}
+                required
               />
             </div>
             <div className="d-grid gap-2 mt-3">
@@ -125,6 +129,7 @@ export const SignIn = (props) => {
               placeholder="e.g Jane Doe"
               value={userName}
               onChange={(e) => setUserName(e.target.value)}
+              required
             />
           </div>
           <div className="form-group mt-3">
@@ -135,6 +140,7 @@ export const SignIn = (props) => {
               placeholder="Email Address"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
+              required
             />
           </div>
           <div className="form-group mt-3">
@@ -145,6 +151,7 @@ export const SignIn = (props) => {
               placeholder="Password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
+              required
             />
           </div>
           <div className="d-grid gap-2 mt-3">

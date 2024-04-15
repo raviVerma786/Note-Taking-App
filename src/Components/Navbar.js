@@ -1,5 +1,8 @@
-import React from "react";
+import React,{ useContext } from "react";
 import { useNavigate } from "react-router-dom";
+import { UserContext } from "../Context/UserCredentials";
+import { app,auth } from "../firebase";
+import { signOut } from "firebase/auth";
 
 const Navbar = (props) => {
   let navigate = useNavigate();
@@ -8,10 +11,20 @@ const Navbar = (props) => {
     navigate(path);
   };
   
+  const userDetails = useContext(UserContext);
+  console.log(userDetails);
+
   const logOutUser = ()=>{
     console.log('Log out called');
+    signOut(auth).then((res)=> {
+      console.log("Successfully logged out!");
+      userDetails.setSignedIn(false);
+      userDetails.setUser(null);
+      userDetails.setEmail(null);
+    })
   }
   
+
   return (
     <>
       <nav className="navbar navbar-expand-lg navbar-dark bg-dark sticky-top d-flex justify-content-between">
@@ -19,7 +32,7 @@ const Navbar = (props) => {
           Note Taking App
         </a>
 
-        {!props.user ? <button
+        {!userDetails.signedIn ? <button
           id="LogInButton"
           className="btn btn-outline-primary my-2 my-sm-0"
           onClick={routeChange}
