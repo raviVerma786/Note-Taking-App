@@ -21,7 +21,7 @@ const Navbar = () => {
           Note Taking App
         </a>
 
-        {userSignedIn ? <button
+        {!userSignedIn ? <button
           id="LogInButton"
           className="btn btn-outline-primary my-2 my-sm-0"
           onClick={routeChange}

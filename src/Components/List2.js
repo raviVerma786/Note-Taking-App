@@ -1,7 +1,14 @@
-import React from "react";
+import React, { useState } from "react";
+import UpdateModal from "./Modal/UpdateModal";
 
 export const List2 = (props) => {
+  const [updating,setUpdating] = useState(false);
+  const [deleting,setDeleting] = useState(false);
   return (
+    <>
+
+    {updating && <UpdateModal setUpdating = {setUpdating} noteData = {props.noteVal} id={props.id}/>}
+
     <div className="card-deck">
       <div id="cardShadow" className="card">
         <div className="card-body">
@@ -12,6 +19,8 @@ export const List2 = (props) => {
             type="button"
             id="deleteButton"
             className="btn btn-primary m-2 py-0"
+            data-target="#exampleModalCenter"
+            data-toggle="modal"
             onClick={() => {
               return props.onSelect(props.id);
             }}
@@ -22,6 +31,7 @@ export const List2 = (props) => {
             id="updateButton"
             type="button"
             className="btn btn-secondary m-2 py-0"
+            onClick={()=>setUpdating(true)}
           >
             Update
           </button>
@@ -31,5 +41,6 @@ export const List2 = (props) => {
         </div>
       </div>
     </div>
+    </>
   );
 };

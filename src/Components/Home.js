@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import ReactDOM from "react-dom";
 import "../App.css";
 // import List from "./List";
 import { List2 } from "./List2";
@@ -11,6 +12,7 @@ import {
   remove,
   update,
 } from "firebase/database";
+import UpdateModal from "./Modal/UpdateModal";
 
 const db = getDatabase(app);
 let noteId = 0;
@@ -66,18 +68,15 @@ export default function Home() {
 
   const deleteDataFromDatabase = (key) => {
     const dbNoteRef = ref(db, "Notes/" + key);
+
+    // ReactDOM.render()
     if (window.confirm("Are you sure ?") === true) {
       remove(dbNoteRef);
     }
   };
 
-  const updateDataFromDatabase = async(key, noteValue) => {
-    // setUpdating(true);
-    // const noteRef = ref(db,'Notes/' + key);
-    // setinputData(noteValue);
-    // await update(noteRef,{id:key,note:inputData});
-    // setUpdating(false);
-    // setinputData("");
+  const updateDataFromDatabase = (key, noteValue) => {
+    setUpdating(true);
   };
 
   // Before firebase and using only usestate
@@ -107,7 +106,7 @@ export default function Home() {
       <div className="mainDiv">
         <div className="centerDiv">
           <br />
-          {/* <h1>Note Taking App</h1> */}
+  
           <br />
           <input
             type="text"
