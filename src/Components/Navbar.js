@@ -1,7 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 
-const Navbar = () => {
+const Navbar = (props) => {
   let navigate = useNavigate();
   const routeChange = () => {
     let path = `/SignIn`;
@@ -11,8 +11,6 @@ const Navbar = () => {
   const logOutUser = ()=>{
     console.log('Log out called');
   }
-
-  const userSignedIn = false;
   
   return (
     <>
@@ -21,7 +19,7 @@ const Navbar = () => {
           Note Taking App
         </a>
 
-        {!userSignedIn ? <button
+        {!props.user ? <button
           id="LogInButton"
           className="btn btn-outline-primary my-2 my-sm-0"
           onClick={routeChange}

@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import ReactDOM from "react-dom";
 import "../App.css";
 // import List from "./List";
 import { List2 } from "./List2";
@@ -9,10 +8,7 @@ import {
   ref,
   set,
   onValue,
-  remove,
-  update,
 } from "firebase/database";
-import UpdateModal from "./Modal/UpdateModal";
 
 const db = getDatabase(app);
 let noteId = 0;
@@ -20,7 +16,6 @@ let noteId = 0;
 export default function Home() {
   const [inputData, setinputData] = useState("");
   const [notesData, setNotesData] = useState(null);
-  const [updating, setUpdating] = useState(false);
 
   useEffect(() => {
     const dbref = ref(db, "Notes");
@@ -66,18 +61,18 @@ export default function Home() {
     setinputData("");
   };
 
-  const deleteDataFromDatabase = (key) => {
-    const dbNoteRef = ref(db, "Notes/" + key);
+  // const deleteDataFromDatabase = (key) => {
+  //   const dbNoteRef = ref(db, "Notes/" + key);
 
-    // ReactDOM.render()
-    if (window.confirm("Are you sure ?") === true) {
-      remove(dbNoteRef);
-    }
-  };
+  //   // ReactDOM.render()
+  //   if (window.confirm("Are you sure ?") === true) {
+  //     remove(dbNoteRef);
+  //   }
+  // };
 
-  const updateDataFromDatabase = (key, noteValue) => {
-    setUpdating(true);
-  };
+  // const updateDataFromDatabase = (key, noteValue) => {
+  //   setUpdating(true);
+  // };
 
   // Before firebase and using only usestate
   // const listOfItems = () => {
@@ -106,7 +101,7 @@ export default function Home() {
       <div className="mainDiv">
         <div className="centerDiv">
           <br />
-  
+        {/* {userSignedIn && <h1>Welcome To NoteTaking Web App!</h1>} */}
           <br />
           <input
             type="text"
@@ -119,7 +114,7 @@ export default function Home() {
             className="btn btn-secondary mx-2 rounded-pill"
             onClick={putDataIntoDatabase}
           >
-            {updating ? "Update" : "➕"}
+            ➕
           </button>
           <ol>
             {notesData && (
@@ -132,8 +127,6 @@ export default function Home() {
                       id={key}
                       date={value.date}
                       time={value.time}
-                      onSelect={deleteDataFromDatabase}
-                      onUpdate={updateDataFromDatabase}
                     />
                   );
                 })}

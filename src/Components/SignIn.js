@@ -27,6 +27,9 @@ export const SignIn = (props) => {
     signInWithEmailAndPassword(auth, email, password)
       .then((userCredentials) => {
         console.log(userCredentials);
+        setEmail(email);
+        setUserName(email);
+        console.log(email);
       })
       .catch((error) => {
         console.log(error);
@@ -45,7 +48,7 @@ export const SignIn = (props) => {
         console.log(error);
       });
 
-      // NavigateToHome();
+      changeAuthMode();
   };
 
   if (authMode === "signin") {

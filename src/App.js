@@ -3,15 +3,13 @@ import Navbar from "./Components/Navbar";
 import Home from "./Components/Home";
 import { SignIn } from "./Components/SignIn";
 import { Routes, Route } from "react-router-dom";
-import Modal from "./Components/Modal/Modal";
 
 const App = () => {
   const [userSignedIn,setUserSignedIn] = useState(false);
   const [user,setUser] = useState(null);
   return (
     <>
-      <Navbar setUserSignedIn={setUserSignedIn} setUser={setUser}/>
-      <Modal/>
+      <Navbar setUserSignedIn={setUserSignedIn} userSignedIn={userSignedIn} setUser={setUser} user = {user}/>
 
       <Routes>
         <Route path="/" element={<Home />} />

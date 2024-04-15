@@ -53,7 +53,7 @@ const UpdateModal = (props) => {
           onChange={(e) => setInputValue(e.target.value)}
         />
         <div className="buttons">
-          <button className="btn btn-primary m-2" onClick={updateFromDatabase}>
+          <button className="btn btn-primary m-2 bg-primary" onClick={updateFromDatabase}>
             Update
           </button>
           <button
