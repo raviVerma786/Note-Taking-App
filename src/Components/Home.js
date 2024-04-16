@@ -16,12 +16,12 @@ const db = getDatabase(app);
 let noteId = 0;
 export default function Home() {
   const [inputData, setinputData] = useState("");
-  const [notesData, setNotesData] = useState(null);
+  const [notesData, setNotesData] = useState(null); 
 
   const userDetails = useContext(UserContext);
 
   useEffect(() => {
-    const dbref = ref(db, "Notes");
+    const dbref = ref(db, `Notes`);
     onValue(dbref, (snapshot) => {
       const data = snapshot.val();
       setNotesData(data);
@@ -47,7 +47,7 @@ export default function Home() {
 
     const dt = `${dd}/${mm}/${yy}`;
     const t = `${hh}:${min}`;
-
+    
     set(ref(db, "Notes/" + noteId), {
       id: noteId,
       note: inputData,
@@ -70,7 +70,6 @@ export default function Home() {
   //   // ReactDOM.render()
   //   if (window.confirm("Are you sure ?") === true) {
   //     remove(dbNoteRef);
-  //   }
   // };
 
   // const updateDataFromDatabase = (key, noteValue) => {
@@ -114,12 +113,12 @@ export default function Home() {
           />
 
           <button
-            className="btn btn-secondary mx-2 rounded-pill"
+            className="btn btn-success mx-2 rounded-pill"
             onClick={putDataIntoDatabase}
           >
             ➕
           </button>
-          <ol>
+          <ol className="mt-5">
             {notesData && (
               <div className="todo_style">
                 {Object.entries(notesData).map(([key, value]) => {

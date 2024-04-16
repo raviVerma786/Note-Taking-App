@@ -23,7 +23,7 @@
   overflow-y: scroll;
 }
 
-h1{
+/* h1{
   color: white;
   background: transparent;
   background-color: grey;
@@ -31,7 +31,7 @@ h1{
   box-shadow: 5px 5px 15px -5px rgb(16, 20, 70);
   border-radius: 1rem;
   margin: 0 .3rem;
-}
+} */
 
 input{
   text-align: center;
@@ -45,6 +45,9 @@ input{
   border-bottom : 2px solid grey;
 }
 
+.updateInput{
+  text-align: left;
+}
 ol{
   margin-top: 2rem;
   display: flex;

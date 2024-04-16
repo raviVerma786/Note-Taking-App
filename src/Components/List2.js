@@ -1,20 +1,23 @@
 import React, { useState } from "react";
-import UpdateModal from "./Modal/UpdateModal";
-import DeleteModal from "./Modal/DeleteModal";
+// import UpdateModal from "./Modal/UpdateModal";
+import { Button } from "react-bootstrap";
+import DeleteBootstrapModal from "./Modal/DeleteBootstrapModal";
+import UpdateBootrapModal from "./Modal/UpdateBootrapModal";
 
 export const List2 = (props) => {
   const [updating, setUpdating] = useState(false);
   const [deleting, setDeleting] = useState(false);
+
   return (
     <>
-      {updating && (
-        <UpdateModal
-          setUpdating={setUpdating}
-          noteData={props.noteVal}
+        <UpdateBootrapModal
+          show={updating}
+          noteData = {props.noteVal}
+          onHide={() => setUpdating(false)}
           id={props.id}
         />
-      )}
-      {deleting && <DeleteModal setDeleting={setDeleting} id={props.id} />}
+
+     <DeleteBootstrapModal show={deleting} onHide={() => setDeleting(false)} id={props.id} />
 
       <div className="card-deck">
         <div id="cardShadow" className="card">
@@ -22,14 +25,18 @@ export const List2 = (props) => {
             <p className="card-text">{props.noteVal}</p>
           </div>
           <div className="operations center">
-            <button
+            {/* <button
               type="button"
               id="deleteButton"
               className="btn btn-primary m-2 py-0"
               onClick={() => setDeleting(true)}
             >
               Delete
-            </button>
+            </button> */}
+            <Button variant="danger" className="py-0" onClick={() => setDeleting(true)}>
+              Delete
+            </Button>
+
             <button
               id="updateButton"
               type="button"

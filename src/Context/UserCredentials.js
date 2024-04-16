@@ -3,8 +3,8 @@ import { createContext, useState } from "react";
 export const UserContext = createContext(null);
 
 export const UserContextProvider = (props) =>{
-    const [user,setUser] = useState(null);
-    const [email,setEmail] = useState(null);
+    const [user,setUser] = useState("");
+    const [email,setEmail] = useState("");
     const [signedIn,setSignedIn] = useState(false);
 
     return (

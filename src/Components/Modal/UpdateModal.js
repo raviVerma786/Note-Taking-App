@@ -9,11 +9,11 @@ const UpdateModal = (props) => {
   useEffect(() => {
     document.body.style.overflowY = "hidden";
     setInputValue(props.noteData);
-
+    console.log("ravi");
     return () => {
       document.body.style.overflowY = "scroll";
     };
-  }, []);
+  }, [props.noteData]);
 
   const updateFromDatabase = () => {
     const date = new Date();

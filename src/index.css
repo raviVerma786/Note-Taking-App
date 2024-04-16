@@ -31,12 +31,12 @@ code {
   box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
   border-radius: 1rem;
 }
-h1{
+/* h1{
   font-family: "Alegreya", serif;
   font-optical-sizing: auto;
   font-weight: 800;
   font-style: normal;
-}
+} */
 
 
 .updateButton{
@@ -64,5 +64,5 @@ h1{
 
 #logo{
   font-size: 1.7rem;
-  font-weight: 590;
+  font-weight: 400;
 }

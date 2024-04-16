@@ -32,6 +32,11 @@ export const SignIn = (props) => {
         console.log(userCredentials);
         userDetails.setSignedIn(true);
         userDetails.setEmail(email);
+        let userMail = userDetails.email;
+        let index = userMail.indexOf("@");
+        let userName = userMail.substring(0,index);
+        userDetails.setUser(userName);
+        // console.log("user : ",userName);
         NavigateToHome();
       })
       .catch((error) => {
@@ -58,7 +63,7 @@ export const SignIn = (props) => {
       <div className="Auth-form-container">
         <form className="Auth-form" onSubmit={SignInHandle}>
           <div className="Auth-form-content">
-            <h3 className="Auth-form-title">Sign In</h3>
+            <h1 className="Auth-form-title">Sign In</h1>
             <div className="text-center">
               Not registered yet?{" "}
               <span
@@ -70,10 +75,10 @@ export const SignIn = (props) => {
               </span>
             </div>
             <div className="form-group mt-3">
-              <label>Email address</label>
+              <label className="h6">Email address</label>
               <input
                 type="email"
-                className="form-control mt-1"
+                className="form-control mt-1 updateInput"
                 placeholder="Enter email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
@@ -81,10 +86,10 @@ export const SignIn = (props) => {
               />
             </div>
             <div className="form-group mt-3">
-              <label>Password</label>
+              <label className="h6">Password</label>
               <input
                 type="password"
-                className="form-control mt-1"
+                className="form-control mt-1 updateInput"
                 placeholder="Enter password"
                 value={password}
                 minLength={8}
@@ -92,14 +97,14 @@ export const SignIn = (props) => {
                 required
               />
             </div>
-            <div className="d-grid gap-2 mt-3">
-              <button type="submit" className="btn btn-primary">
+            <div className="d-grid gap-2 mt-5 text-center">
+              <button type="submit" className="btn btn-primary ">
                 Sign In
               </button>
             </div>
-            <p className="text-center mt-2">
-              Forgot <a href="#">password?</a>
-            </p>
+            {/* <p className="text-center mt-2">
+              Forgot <a href="">password?</a>
+            </p> */}
           </div>
         </form>
       </div>
@@ -115,28 +120,30 @@ export const SignIn = (props) => {
             Already registered?{" "}
             <span
               id="signInButton"
-              className="link-primary"
+              className="link-primary "
               onClick={changeAuthMode}
             >
               Sign In
             </span>
           </div>
           <div className="form-group mt-3">
-            <label>Full Name</label>
+            <label className="h6">Full Name</label>
             <input
               type="text"
-              className="form-control mt-1"
+              className="form-control mt-1 updateInput"
               placeholder="e.g Jane Doe"
               value={userName}
               onChange={(e) => setUserName(e.target.value)}
+              ref={ref => ref && ref.focus()} onFocus={(e)=>e.currentTarget.setSelectionRange(e.currentTarget.value.length, e.currentTarget.value.length)}
               required
+              
             />
           </div>
           <div className="form-group mt-3">
-            <label>Email address</label>
+            <label className="h6">Email address</label>
             <input
               type="email"
-              className="form-control mt-1"
+              className="form-control mt-1 updateInput"
               placeholder="Email Address"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
@@ -144,24 +151,24 @@ export const SignIn = (props) => {
             />
           </div>
           <div className="form-group mt-3">
-            <label>Password</label>
+            <label className="h6">Password</label>
             <input
               type="password"
-              className="form-control mt-1"
+              className="form-control mt-1 updateInput"
               placeholder="Password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               required
             />
           </div>
-          <div className="d-grid gap-2 mt-3">
+          <div className="d-grid gap-2 mt-5 text-center">
             <button type="submit" className="btn btn-primary">
               Sign Up
             </button>
           </div>
-          <p className="text-center mt-2">
+          {/* <p className="text-center mt-2">
             Forgot <a href="#">password?</a>
-          </p>
+          </p> */}
         </div>
       </form>
     </div>

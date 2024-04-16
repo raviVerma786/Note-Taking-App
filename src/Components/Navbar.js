@@ -1,7 +1,7 @@
 import React,{ useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { UserContext } from "../Context/UserCredentials";
-import { app,auth } from "../firebase";
+import { auth } from "../firebase";
 import { signOut } from "firebase/auth";
 
 const Navbar = (props) => {
@@ -28,20 +28,20 @@ const Navbar = (props) => {
   return (
     <>
       <nav className="navbar navbar-expand-lg navbar-dark bg-dark sticky-top d-flex justify-content-between">
-        <a id="logo" className="navbar-brand" href="/">
+        <a id="logo" className="navbar-brand mx-2" href="/">
           Note Taking App
         </a>
 
         {!userDetails.signedIn ? <button
           id="LogInButton"
-          className="btn btn-outline-primary my-2 my-sm-0"
+          className="btn btn-outline-primary mx-3 my-sm-0"
           onClick={routeChange}
         >
           Log in/Sign up
         </button> : 
          <button
           id="LogInButton"
-          className="btn btn-outline-primary my-2 my-sm-0"
+          className="btn btn-outline-primary mx-2 my-sm-0"
           onClick={logOutUser}
         >
           Log out
