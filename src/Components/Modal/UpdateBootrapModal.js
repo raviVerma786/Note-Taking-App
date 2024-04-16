@@ -6,7 +6,7 @@ import { Button,Modal } from 'react-bootstrap';
 const UpdateBootrapModal = (props) => {
   const [inputValue, setInputValue] = useState("");
   useState(()=>{
-    setInputValue(props.noteData);
+    setInputValue(props.notedata);
 
     return () => setInputValue("");
   },[props.noteData])

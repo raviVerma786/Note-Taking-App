@@ -1,6 +1,5 @@
 import React, { useEffect, useState,useContext } from "react";
 import "../App.css";
-// import List from "./List";
 import { List2 } from "./List2";
 import { app } from "../firebase";
 import {
@@ -11,27 +10,40 @@ import {
 } from "firebase/database";
 
 import { UserContext } from "../Context/UserCredentials";
+import { useNavigate } from "react-router-dom";
 
 const db = getDatabase(app);
 let noteId = 0;
 export default function Home() {
   const [inputData, setinputData] = useState("");
-  const [notesData, setNotesData] = useState(null); 
-
+  const [notesData, setNotesData] = useState(null);
+  const navigate = useNavigate();
   const userDetails = useContext(UserContext);
 
   useEffect(() => {
-    const dbref = ref(db, `Notes`);
+    const dbref = ref(db, `${userDetails.user}/Notes`);
+    const token = localStorage.getItem('token');
+
+    if(token){
+      userDetails.setSignedIn(true);
+      userDetails.setUser(localStorage.getItem('userId'));
+    }
+    else{
+      userDetails.setSignedIn(false);
+      navigate('/SignIn');
+    }
+    
+    
     onValue(dbref, (snapshot) => {
       const data = snapshot.val();
       setNotesData(data);
-
+      
       if (data) {
         const allKeys = Object.keys(data);
         noteId = Number(allKeys[allKeys.length - 1]) + 1;
       }
     });
-  }, []);
+  }, [navigate,userDetails]);
 
   const handleInputNoteChange = (event) => {
     setinputData(event.target.value);
@@ -48,7 +60,7 @@ export default function Home() {
     const dt = `${dd}/${mm}/${yy}`;
     const t = `${hh}:${min}`;
     
-    set(ref(db, "Notes/" + noteId), {
+    set(ref(db, `${userDetails.user}/Notes/` + noteId), {
       id: noteId,
       note: inputData,
       date: dt,
@@ -64,42 +76,7 @@ export default function Home() {
     setinputData("");
   };
 
-  // const deleteDataFromDatabase = (key) => {
-  //   const dbNoteRef = ref(db, "Notes/" + key);
-
-  //   // ReactDOM.render()
-  //   if (window.confirm("Are you sure ?") === true) {
-  //     remove(dbNoteRef);
-  // };
-
-  // const updateDataFromDatabase = (key, noteValue) => {
-  //   setUpdating(true);
-  // };
-
-  // Before firebase and using only usestate
-  // const listOfItems = () => {
-  //   if (inputData.length > 0) {
-  //     setItems((oldItems) => {
-  //       return [...oldItems, inputData];
-  //     });
-
-  //   }
-
-  //   setinputData("");
-  // };
-
-  // const deleteItems = (id) => {
-  //   setItems((oldItems) => {
-  //     return oldItems.filter((ele, idx) => {
-  //       return idx !== id;
-  //     });
-  //   });
-
-  //   deleteDataFromDatabase(id);
-  // };
-
-  return (
-    <>
+  return userDetails.signedIn && <>
       <div className="mainDiv">
         <div className="centerDiv">
           <br />
@@ -138,5 +115,5 @@ export default function Home() {
         </div>
       </div>
     </>
-  );
+  ;
 }

@@ -18,9 +18,12 @@ const Navbar = (props) => {
     console.log('Log out called');
     signOut(auth).then((res)=> {
       console.log("Successfully logged out!");
+      localStorage.removeItem("token");
+      localStorage.removeItem("userId");
       userDetails.setSignedIn(false);
       userDetails.setUser(null);
       userDetails.setEmail(null);
+      routeChange();
     })
   }
   

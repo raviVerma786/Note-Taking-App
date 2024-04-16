@@ -29,14 +29,11 @@ export const SignIn = (props) => {
     e.preventDefault();
     signInWithEmailAndPassword(auth, email, password)
       .then((userCredentials) => {
-        console.log(userCredentials);
+        // console.log(userCredentials);
         userDetails.setSignedIn(true);
         userDetails.setEmail(email);
-        let userMail = userDetails.email;
-        let index = userMail.indexOf("@");
-        let userName = userMail.substring(0,index);
-        userDetails.setUser(userName);
-        // console.log("user : ",userName);
+        localStorage.setItem('token',userCredentials._tokenResponse.idToken);
+        localStorage.setItem('userId',userCredentials._tokenResponse.localId);
         NavigateToHome();
       })
       .catch((error) => {

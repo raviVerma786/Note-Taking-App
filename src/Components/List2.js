@@ -12,7 +12,7 @@ export const List2 = (props) => {
     <>
         <UpdateBootrapModal
           show={updating}
-          noteData = {props.noteVal}
+          notedata = {props.noteVal}
           onHide={() => setUpdating(false)}
           id={props.id}
         />
