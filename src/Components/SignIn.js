@@ -1,4 +1,4 @@
-import React,{useContext} from "react";
+import React,{useContext, useEffect} from "react";
 import "./SignIn.css";
 import { useState } from "react";
 import { auth } from "../firebase";
@@ -55,6 +55,10 @@ export const SignIn = (props) => {
       changeAuthMode();
   };
 
+  useEffect(()=>{
+    document.getElementById("signInEmailInput").select();
+  },[])
+
   if (authMode === "signin") {
     return (
       <div className="Auth-form-container">
@@ -74,6 +78,7 @@ export const SignIn = (props) => {
             <div className="form-group mt-3">
               <label className="h6">Email address</label>
               <input
+                id="signInEmailInput"
                 type="email"
                 className="form-control mt-1 updateInput"
                 placeholder="Enter email"
