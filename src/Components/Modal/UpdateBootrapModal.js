@@ -1,7 +1,8 @@
-import React,{useState} from 'react';
+import React,{useContext, useState} from 'react';
 import { app } from '../../firebase';
 import { getDatabase,set,ref } from 'firebase/database';
 import { Button,Modal } from 'react-bootstrap';
+import { UserContext } from '../../Context/UserCredentials';
 
 const UpdateBootrapModal = (props) => {
   const [inputValue, setInputValue] = useState("");
@@ -10,7 +11,10 @@ const UpdateBootrapModal = (props) => {
 
     return () => setInputValue("");
   },[props.noteData])
- 
+  
+
+  const userDetails = useContext(UserContext);
+
   const updateFromDatabase = ()=>{
     const date = new Date();
     const mm = date.getMonth() + 1;
@@ -22,7 +26,7 @@ const UpdateBootrapModal = (props) => {
     const t = `${hh}:${min}`;
     
     const db = getDatabase(app);
-    set(ref(db, "Notes/" + props.id), {
+    set(ref(db, `${userDetails.user}/Notes/` + props.id), {
         id: props.id,
         note: inputValue,
         date: dt,
