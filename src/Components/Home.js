@@ -101,7 +101,7 @@ export default function Home() {
             >
               ➕
             </button>
-            <ol className="mt-5">
+            <div className="mt-5">
               {notesData && (
                 <div className="todo_style">
                   {Object.entries(notesData).map(([key, value]) => {
@@ -117,7 +117,7 @@ export default function Home() {
                   })}
                 </div>
               )}
-            </ol>
+            </div>
           </div>
         </div>
       </>
