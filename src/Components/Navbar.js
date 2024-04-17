@@ -37,14 +37,14 @@ const Navbar = (props) => {
 
         {!userDetails.signedIn ? <button
           id="LogInButton"
-          className="btn btn-outline-primary mx-3 my-sm-0 mx-sm-0"
+          className="btn btn-outline-primary mx-3 my-sm-0"
           onClick={routeChange}
         >
           Log in/Sign up
         </button> : 
          <button
           id="LogInButton"
-          className="btn btn-outline-primary mx-2 my-sm-0 mx-sm-0"
+          className="btn btn-outline-primary mx-2 my-sm-0"
           onClick={logOutUser}
         >
           Log out
