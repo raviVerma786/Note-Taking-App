@@ -7,7 +7,7 @@ import { signOut } from "firebase/auth";
 const Navbar = (props) => {
   let navigate = useNavigate();
   const routeChange = () => {
-    let path = `/SignIn`;
+    let path = `/login`;
     navigate(path);
   };
   

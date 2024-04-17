@@ -56,8 +56,15 @@ export const SignIn = (props) => {
   };
 
   useEffect(()=>{
-    document.getElementById("signInEmailInput").select();
-  },[])
+    if(authMode === "signin"){
+      document.getElementById("signInEmailInput").select();
+    }
+    else{
+      document.getElementById("signUpNameInput").select();
+    }
+    
+
+  },[authMode])
 
   if (authMode === "signin") {
     return (
@@ -94,7 +101,6 @@ export const SignIn = (props) => {
                 className="form-control mt-1 updateInput"
                 placeholder="Enter password"
                 value={password}
-                minLength={8}
                 onChange={(e) => setPassword(e.target.value)}
                 required
               />
@@ -117,7 +123,7 @@ export const SignIn = (props) => {
     <div className="Auth-form-container">
       <form className="Auth-form" onSubmit={SignUpHandle}>
         <div className="Auth-form-content">
-          <h3 className="Auth-form-title">Sign In</h3>
+          <h3 className="Auth-form-title">Sign Up</h3>
           <div className="text-center">
             Already registered?{" "}
             <span
@@ -136,7 +142,7 @@ export const SignIn = (props) => {
               placeholder="e.g Jane Doe"
               value={userName}
               onChange={(e) => setUserName(e.target.value)}
-              ref={ref => ref && ref.focus()} onFocus={(e)=>e.currentTarget.setSelectionRange(e.currentTarget.value.length, e.currentTarget.value.length)}
+              id="signUpNameInput"
               required
               
             />
@@ -159,6 +165,7 @@ export const SignIn = (props) => {
               className="form-control mt-1 updateInput"
               placeholder="Password"
               value={password}
+              minLength={8}
               onChange={(e) => setPassword(e.target.value)}
               required
             />

@@ -30,7 +30,7 @@ export default function Home() {
     }
     else{
       userDetails.setSignedIn(false);
-      navigate('/SignIn');
+      navigate('/login');
     }
     
     
