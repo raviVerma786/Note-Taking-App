@@ -19,7 +19,7 @@ export const List2 = (props) => {
 
      <DeleteBootstrapModal show={deleting} onHide={() => setDeleting(false)} id={props.id} />
 
-      <div className="card-deck">
+      <div className="card-deck listCard">
         <div id="cardShadow" className="card">
           <div className="card-body">
             <p className="card-text">{props.noteVal}</p>

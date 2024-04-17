@@ -66,3 +66,13 @@ code {
   font-size: 1.7rem;
   font-weight: 400;
 }
+
+@media screen and (max-width:500px) {
+  #logo{
+    font-size: 1.5rem;
+  }
+
+  #LogInButton{
+    font-size: 1rem;
+  }
+}

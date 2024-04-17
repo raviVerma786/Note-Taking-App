@@ -1,13 +1,8 @@
-import React, { useEffect, useState,useContext } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import "../App.css";
 import { List2 } from "./List2";
 import { app } from "../firebase";
-import {
-  getDatabase,
-  ref,
-  set,
-  onValue,
-} from "firebase/database";
+import { getDatabase, ref, set, onValue } from "firebase/database";
 
 import { UserContext } from "../Context/UserCredentials";
 import { useNavigate } from "react-router-dom";
@@ -22,28 +17,26 @@ export default function Home() {
 
   useEffect(() => {
     const dbref = ref(db, `${userDetails.user}/Notes`);
-    const token = localStorage.getItem('token');
+    const token = localStorage.getItem("token");
 
-    if(token){
+    if (token) {
       userDetails.setSignedIn(true);
-      userDetails.setUser(localStorage.getItem('userId'));
-    }
-    else{
+      userDetails.setUser(localStorage.getItem("userId"));
+    } else {
       userDetails.setSignedIn(false);
-      navigate('/login');
+      navigate("/login");
     }
-    
-    
+
     onValue(dbref, (snapshot) => {
       const data = snapshot.val();
       setNotesData(data);
-      
+
       if (data) {
         const allKeys = Object.keys(data);
         noteId = Number(allKeys[allKeys.length - 1]) + 1;
       }
     });
-  }, [navigate,userDetails]);
+  }, [navigate, userDetails]);
 
   const handleInputNoteChange = (event) => {
     setinputData(event.target.value);
@@ -51,9 +44,15 @@ export default function Home() {
 
   const putDataIntoDatabase = () => {
     const date = new Date();
-    const timeZone = 'Asia/Kolkata'
-    const t = new Intl.DateTimeFormat('en-US', { timeStyle: 'short', timeZone }).format(date);
-    const dt = new Intl.DateTimeFormat('en-US', {dateStyle: 'medium', timeZone }).format(date);
+    const timeZone = "Asia/Kolkata";
+    const t = new Intl.DateTimeFormat("en-US", {
+      timeStyle: "short",
+      timeZone,
+    }).format(date);
+    const dt = new Intl.DateTimeFormat("en-US", {
+      dateStyle: "medium",
+      timeZone,
+    }).format(date);
     // console.log(tme.format(date));
 
     // const mm = date.getMonth() + 1;
@@ -61,10 +60,10 @@ export default function Home() {
     // const yy = date.getFullYear();
     // const hh = date.getHours();
     // const min = date.getMinutes();
-    
+
     // const dt = `${dd}/${mm}/${yy}`;
     // const t = `${hh}:${min}`;
-    
+
     set(ref(db, `${userDetails.user}/Notes/` + noteId), {
       id: noteId,
       note: inputData,
@@ -81,44 +80,47 @@ export default function Home() {
     setinputData("");
   };
 
-  return userDetails.signedIn && <>
-      <div className="mainDiv">
-        <div className="centerDiv">
-          <br />
-        {userDetails.signedIn && <h2>Welcome To NoteTaking App</h2>}
-          <br />
-          <input
-            type="text"
-            placeholder="Create New Note"
-            onChange={handleInputNoteChange}
-            value={inputData}
-          />
+  return (
+    userDetails.signedIn && (
+      <>
+        <div className="mainDiv">
+          <div className="centerDiv">
+            <br />
+            {userDetails.signedIn && <h2>Welcome To NoteTaking App</h2>}
+            <br />
+            <input
+              type="text"
+              placeholder="Create New Note"
+              onChange={handleInputNoteChange}
+              value={inputData}
+            />
 
-          <button
-            className="btn btn-success mx-2 rounded-pill"
-            onClick={putDataIntoDatabase}
-          >
-            ➕
-          </button>
-          <ol className="mt-5">
-            {notesData && (
-              <div className="todo_style">
-                {Object.entries(notesData).map(([key, value]) => {
-                  return (
-                    <List2
-                      noteVal={value.note}
-                      key={key}
-                      id={key}
-                      date={value.date}
-                      time={value.time}
-                    />
-                  );
-                })}
-              </div>
-            )}
-          </ol>
+            <button
+              className="btn btn-success mx-2 rounded-pill"
+              onClick={putDataIntoDatabase}
+            >
+              ➕
+            </button>
+            <ol className="mt-5">
+              {notesData && (
+                <div className="todo_style">
+                  {Object.entries(notesData).map(([key, value]) => {
+                    return (
+                      <List2
+                        noteVal={value.note}
+                        key={key}
+                        id={key}
+                        date={value.date}
+                        time={value.time}
+                      />
+                    );
+                  })}
+                </div>
+              )}
+            </ol>
+          </div>
         </div>
-      </div>
-    </>
-  ;
+      </>
+    )
+  );
 }

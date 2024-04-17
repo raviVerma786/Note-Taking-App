@@ -76,6 +76,7 @@ ol li{
   align-items: center;
   gap: 1rem;
   padding: 1rem;
+  /* width: 100vw; */
 }
 
 .todo_style .fa-times{
@@ -106,7 +107,7 @@ ol li{
   cursor: pointer;
 }
 
-@media screen and (max-width:700px) {
+@media screen and (max-width:550px) {
   /* .centerDiv{
     width: 85%;
     height: 90vh;
@@ -117,4 +118,18 @@ ol li{
     height: 1.2rem;
   }
 
+  .listCard{
+    width: 100%;
+  }
+}
+
+@media screen and (max-width:700px) {
+  /* .centerDiv{
+    width: 85%;
+    height: 90vh;
+  } */
+
+  .listCard{
+    width: 80%;
+  }
 }

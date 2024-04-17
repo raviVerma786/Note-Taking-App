@@ -26,7 +26,10 @@ const DeleteModal = (props) => {
         <p>After deleting you will not be able to get the data.</p>
 
         <div className="buttons">
-          <button className="btn btn-primary m-2 bg-danger" onClick={deleteFromDatabase}>
+          <button
+            className="btn btn-primary m-2 bg-danger"
+            onClick={deleteFromDatabase}
+          >
             Delete
           </button>
           <button
