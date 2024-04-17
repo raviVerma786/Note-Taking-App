@@ -51,14 +51,19 @@ export default function Home() {
 
   const putDataIntoDatabase = () => {
     const date = new Date();
-    const mm = date.getMonth() + 1;
-    const dd = date.getDate();
-    const yy = date.getFullYear();
-    const hh = date.getHours();
-    const min = date.getMinutes();
+    const timeZone = 'Asia/Kolkata'
+    const t = new Intl.DateTimeFormat('en-US', { timeStyle: 'short', timeZone }).format(date);
+    const dt = new Intl.DateTimeFormat('en-US', {dateStyle: 'medium', timeZone }).format(date);
+    // console.log(tme.format(date));
 
-    const dt = `${dd}/${mm}/${yy}`;
-    const t = `${hh}:${min}`;
+    // const mm = date.getMonth() + 1;
+    // const dd = date.getDate();
+    // const yy = date.getFullYear();
+    // const hh = date.getHours();
+    // const min = date.getMinutes();
+    
+    // const dt = `${dd}/${mm}/${yy}`;
+    // const t = `${hh}:${min}`;
     
     set(ref(db, `${userDetails.user}/Notes/` + noteId), {
       id: noteId,
