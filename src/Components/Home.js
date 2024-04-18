@@ -136,7 +136,7 @@ export default function Home() {
                         noteVal={value.note}
                         key={key}
                         id={key}
-                        imgUrl = {value.url}
+                        UploadImgUrl = {value.url}
                         date={value.date}
                         time={value.time}
                       />

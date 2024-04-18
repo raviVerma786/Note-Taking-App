@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import { Button } from "react-bootstrap";
 import DeleteBootstrapModal from "./Modal/DeleteBootstrapModal";
 import UpdateBootrapModal from "./Modal/UpdateBootrapModal";
+import { Link } from "react-router-dom";
 
 export const List2 = (props) => {
   const [updating, setUpdating] = useState(false);
@@ -14,16 +15,19 @@ export const List2 = (props) => {
           notedata = {props.noteVal}
           onHide={() => setUpdating(false)}
           id={props.id}
+          ImgUrl = {props.UploadImgUrl}
         />
 
      <DeleteBootstrapModal show={deleting} onHide={() => setDeleting(false)} id={props.id} />
 
       <div className="card-deck listCard">
         <div id="cardShadow" className="card">
-          {props.imgUrl && <div className="uploadImage">
-            <img src={props.imgUrl} width={"100%"} height={"50%"} alt="404 pic not found" />
-          </div>}
-
+        <div className="uploadImage mt-2">
+          {props.UploadImgUrl && 
+            <Link to={props.UploadImgUrl} target="_blank" width="200px" height="200px"> <img src={props.UploadImgUrl} width="200px" height="200px" alt="404 pic not found" /></Link>
+            /* <embed src={props.imgUrl} width="100%" height="400px" /> */
+          }
+          </div>
           <div className="card-body">
             <p className="card-text">{props.noteVal}</p>
           </div>

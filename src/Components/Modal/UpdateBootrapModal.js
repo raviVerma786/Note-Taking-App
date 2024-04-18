@@ -38,6 +38,7 @@ const UpdateBootrapModal = (props) => {
     set(ref(db, `${userDetails.user}/Notes/` + props.id), {
       id: props.id,
       note: inputValue,
+      url: props.ImgUrl,
       date: dt,
       time: t,
     })
