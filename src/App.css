@@ -33,7 +33,7 @@
   margin: 0 .3rem;
 } */
 
-input{
+#noteInput{
   text-align: center;
   height: 3rem;
   width: 60%;
@@ -107,6 +107,16 @@ ol li{
   cursor: pointer;
 }
 
+.uploadImage{
+  /* max-width: 33%; */
+  text-align: center;
+}
+
+.listCard{
+  max-width: 30%;
+  max-height: 20vh;
+}
+
 @media screen and (max-width:550px) {
   /* .centerDiv{
     width: 85%;
@@ -123,7 +133,7 @@ ol li{
   }
 }
 
-@media screen and (max-width:700px) {
+@media screen and (min-width:550px) and (max-width:700px) {
   /* .centerDiv{
     width: 85%;
     height: 90vh;

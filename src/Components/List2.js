@@ -7,7 +7,6 @@ import UpdateBootrapModal from "./Modal/UpdateBootrapModal";
 export const List2 = (props) => {
   const [updating, setUpdating] = useState(false);
   const [deleting, setDeleting] = useState(false);
-
   return (
     <>
         <UpdateBootrapModal
@@ -21,6 +20,10 @@ export const List2 = (props) => {
 
       <div className="card-deck listCard">
         <div id="cardShadow" className="card">
+          {props.imgUrl && <div className="uploadImage">
+            <img src={props.imgUrl} width={"100%"} height={"50%"} alt="404 pic not found" />
+          </div>}
+
           <div className="card-body">
             <p className="card-text">{props.noteVal}</p>
           </div>
