@@ -15,10 +15,10 @@ export const List2 = (props) => {
           notedata = {props.noteVal}
           onHide={() => setUpdating(false)}
           id={props.id}
-          ImgUrl = {props.UploadImgUrl}
+          imgurl = {props.UploadImgUrl}
         />
 
-     <DeleteBootstrapModal show={deleting} onHide={() => setDeleting(false)} id={props.id} />
+     <DeleteBootstrapModal show={deleting} onHide={() => setDeleting(false)} id={props.id} imgurl = {props.UploadImgUrl}/>
 
       <div className="card-deck listCard">
         <div id="cardShadow" className="card">

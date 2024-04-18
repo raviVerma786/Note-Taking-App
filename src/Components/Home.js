@@ -13,7 +13,7 @@ export default function Home() {
   const [inputData, setinputData] = useState("");
   const [notesData, setNotesData] = useState(null);
   const [img, setImg] = useState(null);
-  const [imgUrl, setImgUrl] = useState(null);
+  const [imgUrl, setImgUrl] = useState("");
 
   const navigate = useNavigate();
   const userDetails = useContext(UserContext);
@@ -94,6 +94,8 @@ export default function Home() {
         console.log("Note added successfully !");
         setinputData("");
         document.getElementById("fileInput").value = null;
+        // setImg(null);
+        setImgUrl("");
       })
       .catch((error) => {
         console.log(error);
