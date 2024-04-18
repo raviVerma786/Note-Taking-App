@@ -52,7 +52,6 @@ export default function Home() {
       uploadBytes(imgRef,img).then((file) => {
         console.log(file);
         getDownloadURL(file.ref).then((val)=>{
-          console.log("url",val);
           setImgUrl(val);
         })
       }).catch((error)=>{
@@ -84,7 +83,7 @@ export default function Home() {
 
 
     //Now putting everything into firebase realtime database
-    set(ref(db, `${userDetails.user}/Notes/` + noteId), {
+     set(ref(db, `${userDetails.user}/Notes/` + noteId), {
       id: noteId,
       note: inputData,
       url: imgUrl,
@@ -94,6 +93,7 @@ export default function Home() {
       .then(() => {
         console.log("Note added successfully !");
         setinputData("");
+        document.getElementById("fileInput").value = null;
       })
       .catch((error) => {
         console.log(error);
