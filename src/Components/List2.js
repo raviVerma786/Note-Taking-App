@@ -10,23 +10,42 @@ export const List2 = (props) => {
   const [deleting, setDeleting] = useState(false);
   return (
     <>
-        <UpdateBootrapModal
-          show={updating}
-          notedata = {props.noteVal}
-          onHide={() => setUpdating(false)}
-          id={props.id}
-          imgurl = {props.UploadImgUrl}
-        />
+      <UpdateBootrapModal
+        show={updating}
+        notedata={props.noteVal}
+        onHide={() => setUpdating(false)}
+        id={props.id}
+        imgurl={props.UploadImgUrl}
+      />
 
-     <DeleteBootstrapModal show={deleting} onHide={() => setDeleting(false)} id={props.id} imgurl = {props.UploadImgUrl}/>
+      <DeleteBootstrapModal
+        show={deleting}
+        onHide={() => setDeleting(false)}
+        id={props.id}
+        imgurl={props.UploadImgUrl}
+      />
 
       <div className="card-deck listCard">
         <div id="cardShadow" className="card">
-        <div className="uploadImage mt-2">
-          {props.UploadImgUrl && 
-            <Link to={props.UploadImgUrl} target="_blank" width="200px" height="200px"> <img src={props.UploadImgUrl} width="200px" height="200px" alt="404 pic not found" /></Link>
-            /* <embed src={props.imgUrl} width="100%" height="400px" /> */
-          }
+          <div className="uploadImage mt-2">
+            {
+              props.UploadImgUrl && (
+                <Link
+                  to={props.UploadImgUrl}
+                  target="_blank"
+                  width="200px"
+                  height="200px"
+                >
+                  <img
+                    src={props.UploadImgUrl}
+                    width="200px"
+                    height="200px"
+                    alt="404 pic not found"
+                  />
+                </Link>
+              )
+              /* <embed src={props.imgUrl} width="100%" height="400px" /> */
+            }
           </div>
           <div className="card-body">
             <p className="card-text">{props.noteVal}</p>
@@ -40,7 +59,11 @@ export const List2 = (props) => {
             >
               Delete
             </button> */}
-            <Button variant="danger" className="py-0" onClick={() => setDeleting(true)}>
+            <Button
+              variant="danger"
+              className="py-0"
+              onClick={() => setDeleting(true)}
+            >
               Delete
             </Button>
 
